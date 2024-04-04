@@ -5,6 +5,7 @@ from flask import render_template
 import logging
 import os
 import sys
+from mistral import ask_mistral
 
 SERVICE_HOST = os.getenv('SERVER_HOST', '0.0.0.0')
 SERVICE_PORT = os.getenv('SERVER_PORT', 8080)
@@ -83,7 +84,9 @@ def ui():
 
 
 def get_echo_response(input):
-    return f'{CHARACTER_NAME} said {input}'
+
+
+    return ask_mistral(question=input)
 
 if __name__ == '__main__':
     app.run(host=SERVICE_HOST, port=SERVICE_PORT)
